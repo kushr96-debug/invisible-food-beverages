@@ -101,7 +101,7 @@ export default function ProductsCatalog({ initialCategory = catalogData[0].id }:
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {sub.items.map((item, i) => (
                           <Link key={i} href={`/products/${activeCategory}/${makeSlug(item)}`} className={`p-4 rounded-xl ${theme.surface} border ${theme.border} ${theme.surfaceHover} transition-colors cursor-pointer group flex items-center gap-4`}>
-                            <img src={getProductImage(item, activeData)} alt={item} className="h-14 w-14 rounded-lg object-cover border border-white/10" />
+                            <img src={getProductImage(item, activeData)} alt={item} className="h-14 w-14 rounded-lg object-cover border border-white/10 transition-transform duration-500 group-hover:scale-125" />
                             <span className="font-medium text-gray-200 group-hover:text-white flex-1">{item}</span>
                             <svg className={`w-4 h-4 ${theme.textMuted} group-hover:text-[#D4FF00] transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                           </Link>
@@ -117,7 +117,7 @@ export default function ProductsCatalog({ initialCategory = catalogData[0].id }:
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {activeData.items.map((item, i) => (
                     <Link key={i} href={`/products/${activeCategory}/${makeSlug(item)}`} className={`p-4 rounded-xl ${theme.surface} border ${theme.border} ${theme.surfaceHover} transition-colors cursor-pointer group flex items-center gap-4`}>
-                      <img src={getProductImage(item, activeData)} alt={item} className="h-14 w-14 rounded-lg object-cover border border-white/10" />
+                      <img src={getProductImage(item, activeData)} alt={item} className="h-14 w-14 rounded-lg object-cover border border-white/10 transition-transform duration-500 group-hover:scale-125" />
                       <span className="font-medium text-gray-200 group-hover:text-white flex-1">{item}</span>
                       <svg className={`w-4 h-4 ${theme.textMuted} group-hover:text-[#D4FF00] transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                     </Link>

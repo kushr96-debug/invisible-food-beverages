@@ -55,15 +55,15 @@ export function Navbar() {
                       </Link>
                       <div className="mt-7 space-y-5">
                         {column.products.map((product) => (
-                          <Link key={product.name} href={product.href} className="flex gap-4 rounded-2xl p-2 -m-2 transition hover:bg-white/5 focus:bg-white/5 focus:outline-none">
+                          <Link key={product.name} href={product.href} className="group/item flex gap-4 rounded-2xl p-2 -m-2 transition hover:bg-white/5 focus:bg-white/5 focus:outline-none">
                             <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-emerald-200/20 bg-white/10">
-                              <Image src={product.image} alt={product.name} fill sizes="56px" className="object-cover" />
-                            </span>
-                            <span>
-                              <span className="block text-lg font-extrabold leading-tight text-white transition group-hover:text-white">{product.name}</span>
-                              <span className="mt-1 block text-sm leading-6 text-emerald-50/70">{product.desc}</span>
-                            </span>
-                          </Link>
+                          <Image src={product.image} alt={product.name} fill sizes="56px" className="object-cover transition-transform duration-500 group-hover/item:scale-125" />
+                        </span>
+                        <span>
+                          <span className="block text-lg font-extrabold leading-tight text-white transition group-hover/item:text-emerald-300">{product.name}</span>
+                          <span className="mt-1 block text-sm leading-6 text-emerald-50/70">{product.desc}</span>
+                        </span>
+                      </Link>
                         ))}
                       </div>
                     </div>
