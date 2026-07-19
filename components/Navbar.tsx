@@ -17,7 +17,7 @@ const menuColumns = featuredCategoryIds.map((categoryId) => {
       name,
       href: `/products/${category.id}/${makeSlug(name)}`,
       desc: category.summary,
-      image: `/${category.id}.png`
+      image: getProductImage(name, category)
     })),
   };
 });

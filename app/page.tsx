@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { getCategory, getProductImage } from '@/lib/products';
 
 // Centralized theme variables for easy reusability and updates
 const theme = {
@@ -23,6 +24,13 @@ const theme = {
 
 export default function HomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  const premiumRice = getCategory('premium-rice');
+  const wholeSpices = getCategory('whole-spices');
+  const herbs = getCategory('herbs');
+  const basmatiImage = premiumRice ? getProductImage('Premium Basmati Rice', premiumRice) : '/premium-rice.png';
+  const turmericImage = wholeSpices ? getProductImage('Turmeric', wholeSpices) : '/whole-spices.png';
+  const moringaImage = herbs ? getProductImage('Moringa Powder', herbs) : '/herbs.png';
 
   const testimonials = [
     {
@@ -229,7 +237,7 @@ export default function HomePage() {
             {/* Feature 1 - Large Image Card */}
             <Link href="/products/premium-rice" className={`lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
               <div className="aspect-video lg:aspect-[4/3] relative overflow-hidden">
-                <img src="https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c860ae_e93d3f3e-4f5a-4b80-b7de-23f5a806efe5.avif" alt="Grains" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={basmatiImage} alt="Premium Basmati Rice" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
               <div className="p-8">
                 <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4">Grains</span>
@@ -241,11 +249,11 @@ export default function HomePage() {
             {/* Feature 2 - Small Image Card */}
             <Link href="/products/whole-spices" className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
               <div className="aspect-video relative overflow-hidden">
-                <img src="https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c86098_ff17e67d-110e-4d36-a37e-2e73c6720cc8.avif" alt="Spices" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={turmericImage} alt="Turmeric" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
               <div className="p-6">
                 <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4">Spices</span>
-                <h3 className="text-lg font-semibold mb-2">Premium masala blends</h3>
+                <h3 className="text-lg font-semibold mb-2">Whole spice excellence</h3>
                 <p className={`text-sm ${theme.textMuted}`}>Pure, expertly processed spices for export.</p>
               </div>
             </Link>
@@ -253,12 +261,12 @@ export default function HomePage() {
             {/* Feature 3 - Small Image Card */}
             <Link href="/products/herbs" className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
               <div className="aspect-video relative overflow-hidden">
-                <img src="https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c86073_15434d2b-cecd-411e-b1f5-3fbe11627a09.avif" alt="Coffee" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={moringaImage} alt="Moringa Powder" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
               <div className="p-6">
-                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4">Coffee & Tea</span>
-                <h3 className="text-lg font-semibold mb-2">Fresh beans, global shipping</h3>
-                <p className={`text-sm ${theme.textMuted}`}>Premium coffee and tea, shipped direct.</p>
+                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4">Herbs</span>
+                <h3 className="text-lg font-semibold mb-2">Clean herbal powders</h3>
+                <p className={`text-sm ${theme.textMuted}`}>Pure herbal ingredients for export.</p>
               </div>
             </Link>
 
