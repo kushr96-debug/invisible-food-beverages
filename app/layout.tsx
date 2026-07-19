@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Invisible Food & Beverages | Premium Agricultural Exports",
+    default: "Invisible Food & Beverages",
     template: "%s | Invisible Food & Beverages",
   },
   description: "Certified grains, spices, lentils, tea, and coffee supplied for global food and beverage buyers.",

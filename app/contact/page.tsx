@@ -1,7 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Contact", description: "Request an export quote from Invisible Food & Beverages." };
+export const metadata: Metadata = { 
+  title: "Contact & FAQ", 
+  description: "Request an export quote from Invisible Food & Beverages." 
+};
+
+// Centralized theme variables
+const theme = {
+  bg: "bg-[#091612]",
+  surface: "bg-[#132620]",
+  surfaceHover: "hover:bg-[#1A332B]",
+  border: "border-white/10",
+  textMain: "text-white",
+  textMuted: "text-gray-400",
+  accentText: "text-[#D4FF00]",
+  btnBg: "bg-[#D4FF00]",
+  btnBgHover: "hover:bg-[#bce000]",
+  btnText: "text-[#091612]",
+};
 
 const faqs = [
   ["How do I get a quote?", "Send your requirements via our form. We'll reply with a custom quote and shipping details."],
@@ -13,44 +30,109 @@ const faqs = [
 
 export default function ContactPage() {
   return (
-    <div className="bg-[#061c2b] text-white">
-      <section id="faq" className="mx-auto grid max-w-7xl gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[0.9fr_1.5fr] lg:px-8">
+    <div className={`min-h-screen ${theme.bg} ${theme.textMain} pt-20`}>
+      
+      {/* FAQ SECTION (Matches Screenshot 2) */}
+      <section id="faq" className="mx-auto grid max-w-7xl gap-16 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.5fr] lg:px-8 border-b border-white/5">
         <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-white/60">FAQ</p>
-          <h1 className="mt-8 text-6xl font-medium leading-[0.98] tracking-tight md:text-8xl">Export answers, simplified</h1>
-          <p className="mt-12 text-xl font-semibold text-white/65">Essential info for global buyers.</p>
-          <Link href="#contact-form" className="mt-12 inline-flex rounded-xl bg-[#ADFF91] px-8 py-4 font-semibold text-[#061c2b] transition hover:bg-[#D4FF00]">Contact</Link>
+          <p className={`text-sm font-bold uppercase tracking-widest ${theme.textMuted} mb-4`}>
+            FAQ
+          </p>
+          <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight mb-6">
+            Export answers, simplified
+          </h1>
+          <p className={`text-xl font-medium ${theme.textMuted} mb-10`}>
+            Essential info for global buyers.
+          </p>
+          <Link href="#contact-form" className={`inline-flex rounded-xl ${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 font-bold transition shadow-lg`}>
+            Contact
+          </Link>
         </div>
+        
         <div className="space-y-4">
           {faqs.map(([q, a], index) => (
-            <details key={q} open={index === 0} className="group rounded-lg bg-white/[0.06] text-white/75">
-              <summary className="flex cursor-pointer list-none items-center justify-between px-8 py-6 text-xl font-semibold text-white/75 marker:hidden">
-                {q}<span className="text-3xl transition group-open:rotate-180">⌄</span>
+            <details key={q} className={`group rounded-xl border ${theme.border} ${theme.surface} overflow-hidden`}>
+              <summary className={`flex cursor-pointer list-none items-center justify-between px-8 py-6 text-lg font-semibold ${theme.textMain} ${theme.surfaceHover} transition-colors marker:hidden`}>
+                {q}
+                <svg className="w-5 h-5 text-gray-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
               </summary>
-              <p className="px-8 pb-8 text-lg font-semibold leading-8 text-white/70">{a}</p>
+              <div className={`px-8 pb-6 pt-2 ${theme.textMuted} text-lg leading-relaxed`}>
+                <p>{a}</p>
+              </div>
             </details>
           ))}
         </div>
       </section>
 
-      <section id="contact-form" className="px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-12 rounded-3xl border border-white/20 p-8 md:p-12 lg:grid-cols-[1.55fr_0.75fr]">
+      {/* CONTACT FORM SECTION */}
+      <section id="contact-form" className="px-4 py-24 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className={`grid gap-12 rounded-3xl border ${theme.border} ${theme.surface} p-8 md:p-12 lg:grid-cols-[1.5fr_1fr]`}>
+          
           <form className="grid gap-7 md:grid-cols-2">
-            {[["FIRST NAME", "First name"], ["LAST NAME", "Last name"], ["BUSINESS EMAIL", "email@website.com"], ["PHONE NUMBER", "1 (555) 000-0000"]].map(([label, placeholder]) => (
-              <label key={label} className="space-y-3 text-sm font-bold tracking-widest text-white/90">{label}<input placeholder={placeholder} className="w-full rounded-xl border border-white/80 bg-transparent px-5 py-5 text-lg text-white outline-none placeholder:text-white/35 focus:border-[#ADFF91]" /></label>
+            {[
+              ["FIRST NAME", "First name"], 
+              ["LAST NAME", "Last name"], 
+              ["BUSINESS EMAIL", "email@website.com"], 
+              ["PHONE NUMBER", "1 (555) 000-0000"]
+            ].map(([label, placeholder]) => (
+              <label key={label} className="space-y-3 text-sm font-bold tracking-widest text-gray-300">
+                {label}
+                <input 
+                  placeholder={placeholder} 
+                  className={`w-full rounded-xl border ${theme.border} bg-[#091612] px-5 py-4 text-lg text-white outline-none placeholder:text-gray-600 focus:border-[#D4FF00] transition-colors`} 
+                />
+              </label>
             ))}
+            
             <fieldset className="md:col-span-2">
-              <legend className="mb-5 text-sm font-bold tracking-widest text-white/90">BUSINESS TYPE</legend>
-              <div className="flex flex-wrap gap-8 text-lg font-bold">{["Importer", "Distributor", "Retailer", "Other"].map((type) => <label key={type} className="flex items-center gap-3"><input name="businessType" type="radio" className="h-6 w-6 accent-[#ADFF91]" />{type}</label>)}</div>
+              <legend className="mb-5 text-sm font-bold tracking-widest text-gray-300">BUSINESS TYPE</legend>
+              <div className="flex flex-wrap gap-8 text-lg font-medium text-gray-200">
+                {["Importer", "Distributor", "Retailer", "Other"].map((type) => (
+                  <label key={type} className="flex items-center gap-3 cursor-pointer">
+                    <input name="businessType" type="radio" className="h-5 w-5 accent-[#D4FF00] bg-transparent border-gray-600" />
+                    {type}
+                  </label>
+                ))}
+              </div>
             </fieldset>
-            <label className="space-y-3 text-sm font-bold tracking-widest text-white/90 md:col-span-2">MESSAGE<textarea placeholder="Type your message..." rows={5} className="w-full rounded-xl border border-white/80 bg-transparent px-5 py-5 text-lg text-white outline-none placeholder:text-white/35 focus:border-[#ADFF91]" /></label>
-            <button className="w-fit rounded-xl bg-[#ADFF91] px-8 py-4 text-lg font-semibold text-[#061c2b] transition hover:bg-[#D4FF00]">Submit</button>
+            
+            <label className="space-y-3 text-sm font-bold tracking-widest text-gray-300 md:col-span-2">
+              MESSAGE
+              <textarea 
+                placeholder="Type your message..." 
+                rows={5} 
+                className={`w-full rounded-xl border ${theme.border} bg-[#091612] px-5 py-4 text-lg text-white outline-none placeholder:text-gray-600 focus:border-[#D4FF00] transition-colors`} 
+              />
+            </label>
+            
+            <button className={`w-fit rounded-xl ${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-10 py-4 text-lg font-bold transition shadow-lg`}>
+              Submit
+            </button>
           </form>
-          <aside className="flex flex-col justify-between gap-12 py-6">
-            <div><h2 className="text-4xl font-semibold">Contact details</h2><p className="mt-6 text-xl font-semibold leading-9 text-white/70">For export or partnership queries, use the information below.</p></div>
-            <div className="space-y-8 text-xl font-bold"><p>☏ &nbsp; +1 (555) 000-0000</p><p>✉ &nbsp; sales@invisiblefoodbeverages.com</p><p>⌖ &nbsp; 101 Web Lane<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;San Francisco, CA, USA</p></div>
-            <div className="flex gap-6 text-3xl text-[#ADFF91]"><span>f</span><span>𝕏</span></div>
+          
+          <aside className="flex flex-col justify-between gap-12 py-6 lg:pl-8 lg:border-l border-white/10">
+            <div>
+              <h2 className="text-4xl font-bold mb-4">Contact details</h2>
+              <p className={`text-xl leading-relaxed ${theme.textMuted}`}>For export or partnership queries, use the information below.</p>
+            </div>
+            <div className="space-y-8 text-xl font-medium">
+              <div className="flex gap-4 items-start">
+                <span className={theme.accentText}>☏</span>
+                <p>+1 (555) 000-0000</p>
+              </div>
+              <div className="flex gap-4 items-start">
+                <span className={theme.accentText}>✉</span>
+                <p>sales@invisiblefb.com</p>
+              </div>
+              <div className="flex gap-4 items-start">
+                <span className={theme.accentText}>⌖</span>
+                <p>101 Web Lane<br />San Francisco, CA, USA</p>
+              </div>
+            </div>
           </aside>
+
         </div>
       </section>
     </div>
