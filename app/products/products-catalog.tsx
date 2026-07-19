@@ -58,7 +58,7 @@ export default function ProductsCatalog({ initialCategory = catalogData[0].id }:
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`text-left px-6 py-4 rounded-xl transition-all duration-200 border-l-4 ${
+                  className={`text-left px-6 py-4 rounded-xl cursor-pointer transition-all duration-200 border-l-4 ${
                     activeCategory === category.id 
                       ? `${theme.surface} border-[#D4FF00] text-white shadow-lg` 
                       : `border-transparent ${theme.textMuted} hover:bg-white/5 hover:text-white`
