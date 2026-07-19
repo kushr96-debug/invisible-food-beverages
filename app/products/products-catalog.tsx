@@ -76,8 +76,8 @@ export default function ProductsCatalog({ initialCategory = catalogData[0].id }:
               <div className={`rounded-2xl overflow-hidden mb-10 ${theme.surface} border ${theme.border}`}>
                 <div className="h-64 relative">
                   <img 
-                    src={activeData.image} 
-                    alt={activeData.name} 
+                    src={`/${activeData.id}.png`}
+                    alt={activeData.name}
                     className="w-full h-full object-cover opacity-60"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t from-[#132620] to-transparent`}></div>
@@ -101,7 +101,8 @@ export default function ProductsCatalog({ initialCategory = catalogData[0].id }:
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {sub.items.map((item, i) => (
                           <Link key={i} href={`/products/${activeCategory}/${makeSlug(item)}`} className={`p-4 rounded-xl ${theme.surface} border ${theme.border} ${theme.surfaceHover} transition-colors cursor-pointer group flex items-center gap-4`}>
-                            <img src={getProductImage(item, activeData)} alt={item} className="h-14 w-14 rounded-lg object-cover border border-white/10" />
+                            {/* <img src={getProductImage(item, activeData)} alt={item} className="h-14 w-14 rounded-lg object-cover border border-white/10" /> */}
+                            <img src="/dehydrated.png"  alt={getProductImage(item, activeData)} className="h-14 w-14 rounded-lg object-cover border border-white/10" />
                             <span className="font-medium text-gray-200 group-hover:text-white flex-1">{item}</span>
                             <svg className={`w-4 h-4 ${theme.textMuted} group-hover:text-[#D4FF00] transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                           </Link>

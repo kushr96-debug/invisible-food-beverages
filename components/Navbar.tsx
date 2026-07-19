@@ -17,7 +17,7 @@ const menuColumns = featuredCategoryIds.map((categoryId) => {
       name,
       href: `/products/${category.id}/${makeSlug(name)}`,
       desc: category.summary,
-      image: getProductImage(name, category),
+      image: `/${category.id}.png`
     })),
   };
 });
@@ -75,10 +75,6 @@ export function Navbar() {
           <Link href="/about" className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">About</Link>
           <Link href="/contact" className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">Contact Us</Link>
           <Link href="/blog" className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">Blog</Link>
-          {/* <Link href="/contact" className="flex items-center gap-2 text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">
-            Support
-            <DownArrow />
-          </Link> */}
         </div>
         <Link href="/products" className="rounded-md border border-emerald-100/20 px-3 py-2 text-sm font-semibold text-emerald-50 md:hidden">Catalog</Link>
       </nav>
