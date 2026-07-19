@@ -1,4 +1,4 @@
-import { catalogData } from '../../catalog-data';
+import { catalogData } from '@/lib/products';
 import ProductsCatalog from '../products-catalog';
 
 export function generateStaticParams() {

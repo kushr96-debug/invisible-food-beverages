@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { catalogData, findProduct, getCategoryProducts, makeSlug } from '../../../catalog-data';
+import { catalogData, findProduct, getCategoryProducts, makeSlug } from '@/lib/products';
 
 const theme = {
   bg: 'bg-[#091612]',

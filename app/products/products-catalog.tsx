@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { catalogData, getProductImage, makeSlug } from '../catalog-data';
+import { catalogData, getProductImage, makeSlug } from '@/lib/products';
 
 // Centralized theme variables for easy reusability and updates
 const theme = {

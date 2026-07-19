@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 // Centralized theme variables for easy reusability and updates
 const theme = {
@@ -44,6 +45,22 @@ export default function HomePage() {
     }
   ];
 
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveTestimonial((current) => (current + 1) % testimonials.length);
+    }, 3000);
+
+    return () => window.clearInterval(timer);
+  }, [testimonials.length]);
+
+  const showPreviousTestimonial = () => {
+    setActiveTestimonial((current) => (current - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const showNextTestimonial = () => {
+    setActiveTestimonial((current) => (current + 1) % testimonials.length);
+  };
+
   return (
     <div className={`min-h-screen ${theme.bg} ${theme.textMain} font-sans`}>
       
@@ -76,12 +93,12 @@ export default function HomePage() {
                 Premium grains, spices, coffee, and lentils.<br />Certified quality. Trusted global partner.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="/products" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-3.5 font-medium transition text-center`}>
+                <Link href="/products" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-3.5 font-medium transition text-center`}>
                   Browse catalog
-                </a>
-                <a href="/export-capabilities" className={`bg-transparent border border-white/20 text-white hover:bg-white/10 px-8 py-3.5 font-medium transition text-center`}>
+                </Link>
+                <Link href="/export-capabilities" className={`bg-transparent border border-white/20 text-white hover:bg-white/10 px-8 py-3.5 font-medium transition text-center`}>
                   How we export
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -155,9 +172,11 @@ export default function HomePage() {
             <p className={`text-lg ${theme.textMuted}`}>Hear from our international partners</p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="relative max-w-4xl mx-auto px-12 md:px-16">
+            <button onClick={showPreviousTestimonial} className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-white/5 p-3 text-white transition hover:border-[#D4FF00]/60 hover:bg-[#D4FF00] hover:text-[#091612]" aria-label="Previous testimonial">‹</button>
+            <button onClick={showNextTestimonial} className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-white/5 p-3 text-white transition hover:border-[#D4FF00]/60 hover:bg-[#D4FF00] hover:text-[#091612]" aria-label="Next testimonial">›</button>
             {/* Active Testimonial Card */}
-            <div className={`p-10 md:p-14 rounded-3xl ${theme.surface} border ${theme.border} mb-8 flex flex-col md:flex-row gap-10 items-center`}>
+            <div className={`p-10 md:p-14 rounded-3xl ${theme.surface} border ${theme.border} mb-8 flex flex-col md:flex-row gap-10 items-center shadow-2xl shadow-black/20`}>
               <div className="w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full overflow-hidden border-4 border-[#091612]">
                 <img 
                   src={testimonials[activeTestimonial].image} 
@@ -170,7 +189,7 @@ export default function HomePage() {
                   <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-2.2 1.8-4 4-4V8zm18 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-2.2 1.8-4 4-4V8z"></path>
                 </svg>
                 <p className="text-xl md:text-2xl font-medium leading-relaxed mb-6">
-                  "{testimonials[activeTestimonial].quote}"
+                  {`“${testimonials[activeTestimonial].quote}”`}
                 </p>
                 <div>
                   <div className="font-bold text-lg">{testimonials[activeTestimonial].name}</div>
@@ -208,7 +227,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* Feature 1 - Large Image Card */}
-            <a href="/products/grains" className={`lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
+            <Link href="/products/premium-rice" className={`lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
               <div className="aspect-video lg:aspect-[4/3] relative overflow-hidden">
                 <img src="https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c860ae_e93d3f3e-4f5a-4b80-b7de-23f5a806efe5.avif" alt="Grains" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
@@ -217,10 +236,10 @@ export default function HomePage() {
                 <h3 className="text-2xl font-semibold mb-2">Certified grains, global supply</h3>
                 <p className={theme.textMuted}>Rice, wheat, and specialty grains for international buyers.</p>
               </div>
-            </a>
+            </Link>
 
             {/* Feature 2 - Small Image Card */}
-            <a href="/products/spices" className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
+            <Link href="/products/whole-spices" className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
               <div className="aspect-video relative overflow-hidden">
                 <img src="https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c86098_ff17e67d-110e-4d36-a37e-2e73c6720cc8.avif" alt="Spices" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
@@ -229,10 +248,10 @@ export default function HomePage() {
                 <h3 className="text-lg font-semibold mb-2">Premium masala blends</h3>
                 <p className={`text-sm ${theme.textMuted}`}>Pure, expertly processed spices for export.</p>
               </div>
-            </a>
+            </Link>
 
             {/* Feature 3 - Small Image Card */}
-            <a href="/products/coffee" className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
+            <Link href="/products/herbs" className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-colors block`}>
               <div className="aspect-video relative overflow-hidden">
                 <img src="https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c86073_15434d2b-cecd-411e-b1f5-3fbe11627a09.avif" alt="Coffee" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
@@ -241,7 +260,7 @@ export default function HomePage() {
                 <h3 className="text-lg font-semibold mb-2">Fresh beans, global shipping</h3>
                 <p className={`text-sm ${theme.textMuted}`}>Premium coffee and tea, shipped direct.</p>
               </div>
-            </a>
+            </Link>
 
             {/* Feature Text Blocks */}
             <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} cursor-pointer ${theme.surfaceHover} transition-colors flex flex-col justify-center`}>

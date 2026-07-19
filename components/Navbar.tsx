@@ -1,84 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
+import { catalogData, getProductImage, makeSlug } from "@/lib/products";
 import { Logo } from "./Logo";
 
-const menuColumns = [
-  {
-    title: "Grains",
-    href: "/products/premium-rice",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?q=80&w=900&auto=format&fit=crop",
-    products: [
-      {
-        name: "White Rice",
-        href: "/products/premium-rice/white-rice",
-        desc: "Premium long-grain rice for export.",
-        image: "https://images.unsplash.com/photo-1586201375761-83865001e8ac?q=80&w=300&auto=format&fit=crop",
-      },
-      {
-        name: "Brown Rice",
-        href: "/products/premium-rice/brown-rice",
-        desc: "Whole grain, high-quality brown rice.",
-        image: "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?q=80&w=300&auto=format&fit=crop",
-      },
-      {
-        name: "Black Rice",
-        href: "/products/premium-rice/black-rice",
-        desc: "Nutrient-rich, specialty black rice.",
-        image: "https://images.unsplash.com/photo-1592997571659-0b21ff64313b?q=80&w=300&auto=format&fit=crop",
-      },
-    ],
-  },
-  {
-    title: "Lentils",
-    href: "/products/grains-pulses",
-    image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?q=80&w=900&auto=format&fit=crop",
-    products: [
-      {
-        name: "Moong Dal",
-        href: "/products/grains-pulses/moong-dal",
-        desc: "High-protein, split yellow lentils.",
-        image: "https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?q=80&w=300&auto=format&fit=crop",
-      },
-      {
-        name: "Toor Dal",
-        href: "/products/grains-pulses/toor-dal",
-        desc: "Premium split pigeon peas.",
-        image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=300&auto=format&fit=crop",
-      },
-      {
-        name: "Masoor Dal",
-        href: "/products/grains-pulses/masoor-dal",
-        desc: "Red lentils, cleaned and sorted.",
-        image: "https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?q=80&w=300&auto=format&fit=crop",
-      },
-    ],
-  },
-  {
-    title: "Spices",
-    href: "/products/whole-spices",
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=900&auto=format&fit=crop",
-    products: [
-      {
-        name: "Whole Spices",
-        href: "/products/whole-spices",
-        desc: "Sourced whole spices, export ready.",
-        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=300&auto=format&fit=crop",
-      },
-      {
-        name: "Ground Spices",
-        href: "/products/ground-spices",
-        desc: "Finely milled, pure spice blends.",
-        image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?q=80&w=300&auto=format&fit=crop",
-      },
-      {
-        name: "Specialty Blends",
-        href: "/products/ground-spices/curry-powder",
-        desc: "Custom spice blends for buyers.",
-        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=300&auto=format&fit=crop",
-      },
-    ],
-  },
-];
+const featuredCategoryIds = ["premium-rice", "grains-pulses", "whole-spices"];
+
+const menuColumns = featuredCategoryIds.map((categoryId) => {
+  const category = catalogData.find((item) => item.id === categoryId) ?? catalogData[0];
+  const products = (category.items ?? category.subcategories?.flatMap((sub) => sub.items) ?? []).slice(0, 3);
+
+  return {
+    title: category.id === "premium-rice" ? "Grains" : category.id === "grains-pulses" ? "Lentils" : "Spices",
+    href: `/products/${category.id}`,
+    image: category.image,
+    products: products.map((name) => ({
+      name,
+      href: `/products/${category.id}/${makeSlug(name)}`,
+      desc: category.summary,
+      image: getProductImage(name, category),
+    })),
+  };
+});
+
+
 
 function DownArrow() {
   return (

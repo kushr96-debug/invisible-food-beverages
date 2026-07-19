@@ -1,23 +1,140 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Contact", description: "Request an export quote from Invisible Food & Beverages." };
+export const metadata: Metadata = { 
+  title: "Contact & FAQ", 
+  description: "Request an export quote from Invisible Food & Beverages." 
+};
+
+// Centralized theme variables
+const theme = {
+  bg: "bg-[#091612]",
+  surface: "bg-[#132620]",
+  surfaceHover: "hover:bg-[#1A332B]",
+  border: "border-white/10",
+  textMain: "text-white",
+  textMuted: "text-gray-400",
+  accentText: "text-[#D4FF00]",
+  btnBg: "bg-[#D4FF00]",
+  btnBgHover: "hover:bg-[#bce000]",
+  btnText: "text-[#091612]",
+};
+
+const faqs = [
+  ["How do I get a quote?", "Send your requirements via our form. We'll reply with a custom quote and shipping details."],
+  ["What payment methods do you accept?", "Wire transfer and agreed trade payment terms can be coordinated after buyer verification and order confirmation."],
+  ["How can I contact your team?", "Use the form, email sales@invisiblefoodbeverages.com, or call our export desk for urgent shipment planning."],
+  ["Can I update my order?", "Yes, our team can review changes before packing or dispatch milestones are finalized."],
+  ["What is your refund process?", "Refund and claim handling depends on contract terms, inspection documents, and shipment status."],
+];
 
 export default function ContactPage() {
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+    <div className={`min-h-screen ${theme.bg} ${theme.textMain} pt-20`}>
+      
+      {/* FAQ SECTION (Matches Screenshot 2) */}
+      <section id="faq" className="mx-auto grid max-w-7xl gap-16 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.5fr] lg:px-8 border-b border-white/5">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-green-600">Contact sales</p>
-          <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">Request an export quote</h1>
-          <p className="mt-6 text-lg text-gray-600">Tell us your category, packaging, volume, and destination requirements. Our team can coordinate sourcing, documentation, and shipment planning.</p>
+          <p className={`text-sm font-bold uppercase tracking-widest ${theme.textMuted} mb-4`}>
+            FAQ
+          </p>
+          <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight mb-6">
+            Export answers, simplified
+          </h1>
+          <p className={`text-xl font-medium ${theme.textMuted} mb-10`}>
+            Essential info for global buyers.
+          </p>
+          <Link href="#contact-form" className={`inline-flex rounded-xl ${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 font-bold transition shadow-lg`}>
+            Contact
+          </Link>
         </div>
-        <div className="rounded-2xl bg-white p-8 shadow-xl">
-          <h2 className="text-2xl font-bold text-gray-900">Start a conversation</h2>
-          <p className="mt-4 text-gray-600">Email our sales team with your product list and target port.</p>
-          <Link href="mailto:sales@invisiblefoodbeverages.com" className="mt-8 inline-flex rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-500">sales@invisiblefoodbeverages.com</Link>
+        
+        <div className="space-y-4">
+          {faqs.map(([q, a], index) => (
+            <details key={q} className={`group rounded-xl border ${theme.border} ${theme.surface} overflow-hidden`}>
+              <summary className={`flex cursor-pointer list-none items-center justify-between px-8 py-6 text-lg font-semibold ${theme.textMain} ${theme.surfaceHover} transition-colors marker:hidden`}>
+                {q}
+                <svg className="w-5 h-5 text-gray-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <div className={`px-8 pb-6 pt-2 ${theme.textMuted} text-lg leading-relaxed`}>
+                <p>{a}</p>
+              </div>
+            </details>
+          ))}
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* CONTACT FORM SECTION */}
+      <section id="contact-form" className="px-4 py-24 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className={`grid gap-12 rounded-3xl border ${theme.border} ${theme.surface} p-8 md:p-12 lg:grid-cols-[1.5fr_1fr]`}>
+          
+          <form className="grid gap-7 md:grid-cols-2">
+            {[
+              ["FIRST NAME", "First name"], 
+              ["LAST NAME", "Last name"], 
+              ["BUSINESS EMAIL", "email@website.com"], 
+              ["PHONE NUMBER", "1 (555) 000-0000"]
+            ].map(([label, placeholder]) => (
+              <label key={label} className="space-y-3 text-sm font-bold tracking-widest text-gray-300">
+                {label}
+                <input 
+                  placeholder={placeholder} 
+                  className={`w-full rounded-xl border ${theme.border} bg-[#091612] px-5 py-4 text-lg text-white outline-none placeholder:text-gray-600 focus:border-[#D4FF00] transition-colors`} 
+                />
+              </label>
+            ))}
+            
+            <fieldset className="md:col-span-2">
+              <legend className="mb-5 text-sm font-bold tracking-widest text-gray-300">BUSINESS TYPE</legend>
+              <div className="flex flex-wrap gap-8 text-lg font-medium text-gray-200">
+                {["Importer", "Distributor", "Retailer", "Other"].map((type) => (
+                  <label key={type} className="flex items-center gap-3 cursor-pointer">
+                    <input name="businessType" type="radio" className="h-5 w-5 accent-[#D4FF00] bg-transparent border-gray-600" />
+                    {type}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            
+            <label className="space-y-3 text-sm font-bold tracking-widest text-gray-300 md:col-span-2">
+              MESSAGE
+              <textarea 
+                placeholder="Type your message..." 
+                rows={5} 
+                className={`w-full rounded-xl border ${theme.border} bg-[#091612] px-5 py-4 text-lg text-white outline-none placeholder:text-gray-600 focus:border-[#D4FF00] transition-colors`} 
+              />
+            </label>
+            
+            <button className={`w-fit rounded-xl ${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-10 py-4 text-lg font-bold transition shadow-lg`}>
+              Submit
+            </button>
+          </form>
+          
+          <aside className="flex flex-col justify-between gap-12 py-6 lg:pl-8 lg:border-l border-white/10">
+            <div>
+              <h2 className="text-4xl font-bold mb-4">Contact details</h2>
+              <p className={`text-xl leading-relaxed ${theme.textMuted}`}>For export or partnership queries, use the information below.</p>
+            </div>
+            <div className="space-y-8 text-xl font-medium">
+              <div className="flex gap-4 items-start">
+                <span className={theme.accentText}>☏</span>
+                <p>+1 (555) 000-0000</p>
+              </div>
+              <div className="flex gap-4 items-start">
+                <span className={theme.accentText}>✉</span>
+                <p>sales@invisiblefb.com</p>
+              </div>
+              <div className="flex gap-4 items-start">
+                <span className={theme.accentText}>⌖</span>
+                <p>101 Web Lane<br />San Francisco, CA, USA</p>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </section>
+    </div>
   );
 }
