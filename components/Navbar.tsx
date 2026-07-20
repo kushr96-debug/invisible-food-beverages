@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { catalogData, getProductImage, makeSlug } from "@/lib/products";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 const featuredCategoryIds = ["premium-rice", "grains-pulses", "whole-spices"];
 const navLinks = [
@@ -44,12 +45,15 @@ export function Navbar() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-emerald-400/10 bg-[#062720]/95 text-white shadow-2xl shadow-emerald-950/25 backdrop-blur">
+    <header className="site-navbar sticky top-0 z-50 border-b shadow-2xl backdrop-blur">
       <nav className="mx-auto flex min-h-16 max-w-7xl items-center justify-between px-4 py-3 sm:min-h-20 sm:px-6 lg:px-8" aria-label="Main navigation">
-        <Logo />
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Logo />
+          <ThemeToggle />
+        </div>
         <div className="hidden items-center gap-8 md:flex">
           <div className="group">
-            <Link href="/products" className="flex items-center gap-2 text-sm font-semibold text-emerald-50/85 transition hover:text-emerald-300" aria-haspopup="true">
+            <Link href="/products" className="nav-link flex items-center gap-2 text-sm font-semibold transition" aria-haspopup="true">
               Products
               <DownArrow />
             </Link>
@@ -82,11 +86,11 @@ export function Navbar() {
               </div>
             </div>
           </div>
-          {navLinks.map((link) => <Link key={link.href} href={link.href} className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">{link.label}</Link>)}
+          {navLinks.map((link) => <Link key={link.href} href={link.href} className="nav-link text-sm font-semibold transition">{link.label}</Link>)}
         </div>
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-100/20 text-emerald-50 transition hover:bg-white/10 md:hidden"
+          className="nav-menu-button inline-flex h-11 w-11 items-center justify-center rounded-xl border transition md:hidden"
           aria-label="Toggle navigation menu"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((current) => !current)}
@@ -98,7 +102,7 @@ export function Navbar() {
           </span>
         </button>
       </nav>
-      <div className={`${isOpen ? "grid" : "hidden"} border-t border-white/10 bg-[#062720] px-4 pb-5 md:hidden`}>
+      <div className={`${isOpen ? "grid" : "hidden"} mobile-nav-panel border-t px-4 pb-5 md:hidden`}>
         <Link onClick={closeMenu} href="/products" className="rounded-2xl bg-[#D4FF00] px-5 py-3 text-center font-bold text-[#091612]">Browse products</Link>
         <div className="mt-4 grid gap-2">
           {catalogData.map((category) => (

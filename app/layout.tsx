@@ -14,8 +14,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="flex min-h-full flex-col bg-white text-gray-900">
+    <html lang="en" className="dark h-full antialiased">
+      <body className="flex min-h-full flex-col bg-background text-foreground">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('theme')||'dark';document.documentElement.classList.toggle('light',t==='light');document.documentElement.classList.toggle('dark',t!=='light')}catch(e){document.documentElement.classList.add('dark')}`,
+          }}
+        />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
