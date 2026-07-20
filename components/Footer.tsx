@@ -7,37 +7,43 @@ const footerGroups = [
   { title: "Exports", links: [{ label: "Logistics", href: "/export-capabilities#logistics" }, { label: "Incoterms", href: "/export-capabilities#incoterms" }, { label: "Global", href: "/export-capabilities#global" }, { label: "Partners", href: "/about#partners" }, { label: "Support", href: "/contact#faq" }] },
 ];
 
-const socials = ["f", "◎", "𝕏", "in", "▶"];
+const socials = [
+  { label: "Facebook", icon: "f", href: "https://www.facebook.com" },
+  { label: "Instagram", icon: "◎", href: "https://www.instagram.com" },
+  { label: "X", icon: "𝕏", href: "https://www.x.com" },
+  { label: "LinkedIn", icon: "in", href: "https://www.linkedin.com" },
+  { label: "YouTube", icon: "▶", href: "https://www.youtube.com" },
+];
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-[#022820] text-emerald-50">
+    <footer className="site-footer mt-auto">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.45fr_2.4fr]">
-          <div>
+        <div className="grid gap-12 text-center lg:grid-cols-[1.1fr_2.4fr] lg:items-start">
+          <div className="flex flex-col items-center">
             <Logo />
-            <div className="mt-10 flex gap-5 text-2xl text-emerald-50/70">
+            <div className="mt-10 flex justify-center gap-5 text-2xl">
               {socials.map((social) => (
-                <span key={social} className="grid h-8 w-8 place-items-center rounded-full transition hover:bg-white/10 hover:text-[#D4FF00]">{social}</span>
+                <Link key={social.label} href={social.href} aria-label={social.label} className="footer-social-link grid h-10 w-10 place-items-center rounded-full transition" target="_blank" rel="noreferrer">{social.icon}</Link>
               ))}
             </div>
           </div>
-          <div className="grid gap-10 sm:grid-cols-3">
+          <div className="grid gap-10 sm:grid-cols-3 sm:justify-items-center">
             {footerGroups.map((group) => (
-              <div key={group.title}>
+              <div key={group.title} className="flex flex-col items-center">
                 <h2 className="text-sm font-bold tracking-[0.22em] text-emerald-50/65">{group.title}</h2>
                 <ul className="mt-5 space-y-4 text-base font-semibold text-emerald-50/60">
                   {group.links.map((link) => (
-                    <li key={link.label}><Link href={link.href} className="transition hover:text-[#D4FF00]">{link.label}</Link></li>
+                    <li key={link.label}><Link href={link.href} className="footer-link transition">{link.label}</Link></li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
         </div>
-        <div className="mt-14 flex flex-col gap-6 border-t border-white/10 pt-8 text-sm font-semibold text-emerald-50/70 md:flex-row md:items-center md:justify-between">
+        <div className="footer-bottom mt-14 flex flex-col items-center gap-6 border-t pt-8 text-center text-sm font-semibold md:flex-row md:justify-center md:gap-12">
           <p>© 2026 Invisible Food and Beverages. All rights reserved.</p>
-          <div className="flex gap-7"><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/sitemap">Sitemap</Link></div>
+          <div className="flex justify-center gap-7"><Link className="footer-link" href="/privacy">Privacy</Link><Link className="footer-link" href="/terms">Terms</Link><Link className="footer-link" href="/sitemap">Sitemap</Link></div>
         </div>
       </div>
     </footer>

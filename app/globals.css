@@ -58,3 +58,281 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+:root.dark,
+:root:not(.light) {
+  --background: #091612;
+  --foreground: #f0fdf4;
+  --nav-bg: rgba(6, 39, 32, 0.95);
+  --nav-border: rgba(52, 211, 153, 0.1);
+  --nav-text: rgba(236, 253, 245, 0.78);
+  --nav-hover: #6ee7b7;
+  --nav-shadow: rgba(2, 44, 34, 0.25);
+  --footer-bg: #022820;
+  --footer-text: #ecfdf5;
+  --footer-muted: rgba(236, 253, 245, 0.68);
+  --theme-card: #111820;
+  --theme-icon: #60a5fa;
+  --theme-ring: rgba(148, 163, 184, 0.22);
+  --theme-shadow: rgba(0, 0, 0, 0.35);
+}
+
+:root.light {
+  --background: #fbfff8;
+  --foreground: #0b241c;
+  --nav-bg: rgba(255, 255, 255, 0.94);
+  --nav-border: rgba(16, 185, 129, 0.2);
+  --nav-text: rgba(6, 78, 59, 0.76);
+  --nav-hover: #047857;
+  --nav-shadow: rgba(6, 78, 59, 0.12);
+  --footer-bg: #f7fff2;
+  --footer-text: #063f31;
+  --footer-muted: rgba(6, 63, 49, 0.68);
+  --theme-card: #ffffff;
+  --theme-icon: #0284c7;
+  --theme-ring: rgba(15, 23, 42, 0.12);
+  --theme-shadow: rgba(15, 23, 42, 0.16);
+}
+
+.site-navbar {
+  background: var(--nav-bg);
+  border-color: var(--nav-border);
+  color: var(--footer-text);
+  box-shadow: 0 25px 50px -12px var(--nav-shadow);
+}
+
+.nav-link {
+  color: var(--nav-text);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--nav-hover);
+}
+
+.nav-menu-button {
+  border-color: var(--theme-ring);
+  color: var(--footer-text);
+}
+
+.nav-menu-button:hover,
+.nav-menu-button:focus-visible {
+  background: color-mix(in srgb, var(--nav-hover) 12%, transparent);
+}
+
+.mobile-nav-panel {
+  background: var(--nav-bg);
+  border-color: var(--nav-border);
+}
+
+.theme-toggle-button {
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  height: 3.25rem;
+  width: 3.25rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--theme-ring);
+  border-radius: 1.25rem;
+  background: var(--theme-card);
+  color: var(--theme-icon);
+  box-shadow: 0 14px 28px -18px var(--theme-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.theme-toggle-button:hover,
+.theme-toggle-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--theme-icon) 45%, var(--theme-ring));
+  box-shadow: 0 18px 34px -18px var(--theme-shadow), 0 0 0 4px color-mix(in srgb, var(--theme-icon) 12%, transparent);
+  outline: none;
+}
+
+.theme-toggle-glow {
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  background: radial-gradient(circle, color-mix(in srgb, var(--theme-icon) 18%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.theme-toggle-button:hover .theme-toggle-glow,
+.theme-toggle-button:focus-visible .theme-toggle-glow {
+  opacity: 1;
+}
+
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.site-footer h2,
+.site-footer ul,
+.footer-bottom {
+  color: var(--footer-muted);
+}
+
+.footer-bottom {
+  border-color: color-mix(in srgb, var(--footer-text) 12%, transparent);
+}
+
+.footer-link:hover,
+.footer-link:focus-visible,
+.footer-social-link:hover,
+.footer-social-link:focus-visible {
+  color: #84cc16;
+  outline: none;
+}
+
+.footer-social-link {
+  color: var(--footer-muted);
+  cursor: pointer;
+}
+
+.footer-social-link:hover,
+.footer-social-link:focus-visible {
+  background: color-mix(in srgb, var(--footer-text) 10%, transparent);
+  transform: translateY(-2px);
+}
+
+:root.dark,
+:root:not(.light) {
+  --page-bg: #091612;
+  --surface-bg: #11231d;
+  --card-bg: #132620;
+  --surface-hover-bg: #1a332b;
+  --border-soft: rgba(255, 255, 255, 0.1);
+  --text-strong: #ffffff;
+  --text-muted: #9ca3af;
+  --accent: #d4ff00;
+  --button-bg: #d4ff00;
+  --button-hover: #bce000;
+  --button-text: #091612;
+  --input-bg: #091612;
+  --hero-start: rgba(9, 22, 18, 0.9);
+  --hero-mid: rgba(9, 22, 18, 0.4);
+  --hero-end: #091612;
+}
+
+:root.light {
+  --page-bg: #f7fff2;
+  --surface-bg: #ffffff;
+  --card-bg: #f0faeb;
+  --surface-hover-bg: #e7f6df;
+  --border-soft: rgba(6, 78, 59, 0.16);
+  --text-strong: #0b241c;
+  --text-muted: rgba(11, 36, 28, 0.66);
+  --accent: #4f7f12;
+  --button-bg: #1f7a4d;
+  --button-hover: #16633d;
+  --button-text: #ffffff;
+  --input-bg: #ffffff;
+  --hero-start: rgba(247, 255, 242, 0.94);
+  --hero-mid: rgba(247, 255, 242, 0.58);
+  --hero-end: #f7fff2;
+}
+
+.theme-page {
+  background: var(--page-bg);
+  color: var(--text-strong);
+}
+
+.theme-surface {
+  background: var(--surface-bg);
+}
+
+.theme-card {
+  background: var(--card-bg);
+}
+
+.theme-surface-hover:hover,
+.group:hover .group-hover\:theme-surface-hover {
+  background: var(--surface-hover-bg);
+}
+
+.theme-border {
+  border-color: var(--border-soft);
+}
+
+.theme-text,
+.hover\:theme-text:hover,
+.group:hover .group-hover\:theme-text {
+  color: var(--text-strong);
+}
+
+.theme-muted {
+  color: var(--text-muted);
+}
+
+.theme-accent,
+.group:hover .group-hover\:theme-accent {
+  color: var(--accent);
+}
+
+.theme-button,
+.group:hover .group-hover\:theme-button {
+  background: var(--button-bg);
+  color: var(--button-text);
+}
+
+.theme-button:hover,
+.theme-button:focus-visible {
+  background: var(--button-hover);
+}
+
+.theme-secondary {
+  background: color-mix(in srgb, var(--text-strong) 8%, transparent);
+  color: var(--text-strong);
+}
+
+.theme-secondary:hover,
+.theme-secondary:focus-visible {
+  background: color-mix(in srgb, var(--text-strong) 14%, transparent);
+}
+
+.theme-input {
+  background: var(--input-bg);
+  color: var(--text-strong);
+}
+
+.theme-input::placeholder {
+  color: color-mix(in srgb, var(--text-muted) 72%, transparent);
+}
+
+.theme-focus-border:focus {
+  border-color: var(--accent);
+}
+
+.theme-hover-border:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.theme-hero-gradient-x {
+  background: linear-gradient(90deg, var(--hero-start), var(--hero-mid), transparent);
+}
+
+.theme-hero-gradient-y {
+  background: linear-gradient(180deg, transparent, transparent, var(--hero-end));
+}
+
+.theme-active-border {
+  border-color: var(--accent);
+}
+
+.theme-accent-soft-bg {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.theme-accent-overlay {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.focus\:theme-focus-border:focus {
+  border-color: var(--accent);
+}
+
+.placeholder\:theme-placeholder::placeholder {
+  color: color-mix(in srgb, var(--text-muted) 70%, transparent);
+}

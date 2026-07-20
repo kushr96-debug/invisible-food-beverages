@@ -6,20 +6,20 @@ import { getCategory, getProductImage } from '@/lib/products';
 
 // Centralized theme variables for easy reusability and updates
 const theme = {
-  bg: "bg-[#091612]",
-  surface: "bg-[#11231D]",
-  surfaceHover: "hover:bg-[#1A332B]",
-  border: "border-white/5",
-  borderActive: "border-[#D4FF00]/50",
-  textMain: "text-white",
-  textMuted: "text-gray-400",
-  accentText: "text-[#D4FF00]",
-  btnBg: "bg-[#D4FF00]",
-  btnBgHover: "hover:bg-[#bce000]",
-  btnText: "text-[#091612]",
-  btnSecondaryBg: "bg-white/10",
-  btnSecondaryHover: "hover:bg-white/20",
-  btnSecondaryText: "text-white"
+  bg: "theme-page",
+  surface: "theme-surface",
+  surfaceHover: "theme-surface-hover",
+  border: "theme-border",
+  borderActive: "theme-active-border",
+  textMain: "theme-text",
+  textMuted: "theme-muted",
+  accentText: "theme-accent",
+  btnBg: "theme-button",
+  btnBgHover: "",
+  btnText: "",
+  btnSecondaryBg: "theme-secondary",
+  btnSecondaryHover: "",
+  btnSecondaryText: ""
 };
 
 // Custom Hook for Staggered Scroll Reveal
@@ -119,8 +119,8 @@ export default function HomePage() {
             alt="Agricultural Field" 
             className="w-full h-full object-cover animate-slow-zoom"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#091612]/90 via-[#091612]/40 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#091612]"></div>
+          <div className="absolute inset-0 theme-hero-gradient-x"></div>
+          <div className="absolute inset-0 theme-hero-gradient-y"></div>
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-12">
@@ -143,7 +143,7 @@ export default function HomePage() {
                 <Link href="/products" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-3.5 font-medium transition text-center rounded-sm`}>
                   Browse catalog
                 </Link>
-                <Link href="/export-capabilities" className={`bg-transparent border border-white/20 text-white hover:bg-white/10 px-8 py-3.5 font-medium transition text-center rounded-sm`}>
+                <Link href="/export-capabilities" className={`bg-transparent border theme-border theme-secondary px-8 py-3.5 font-medium transition text-center rounded-sm`}>
                   How we export
                 </Link>
               </div>
@@ -154,7 +154,7 @@ export default function HomePage() {
       </section>
 
       {/* TRUST LOGOS SECTION */}
-      <section className="py-20 border-t border-white/5">
+      <section className="py-20 border-t theme-border">
         {/* ... (Keep existing trust logos code identical) ... */}
       </section>
 
@@ -207,7 +207,7 @@ export default function HomePage() {
               className={`lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-100 ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} block`}
             >
               <div className="aspect-video lg:aspect-[4/3] relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#D4FF00]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
+                <div className="absolute inset-0 theme-accent-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
                 <img 
                   src={basmatiImage} 
                   alt="Premium Basmati Rice" 
@@ -215,8 +215,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="relative z-20 p-6 sm:p-8">
-                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4 group-hover:bg-[#D4FF00] group-hover:text-[#091612] transition-colors">Grains</span>
-                <h3 className="text-2xl font-semibold mb-2 group-hover:text-[#D4FF00] transition-colors">Certified grains, global supply</h3>
+                <span className="inline-block px-3 py-1 theme-secondary rounded-full text-xs tracking-wider uppercase mb-4 group-hover:theme-button transition-colors">Grains</span>
+                <h3 className="text-2xl font-semibold mb-2 group-hover:theme-accent transition-colors">Certified grains, global supply</h3>
                 <p className={theme.textMuted}>Rice, wheat, and specialty grains for international buyers.</p>
               </div>
             </Link>
@@ -227,7 +227,7 @@ export default function HomePage() {
               className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-200 ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} block`}
             >
               <div className="aspect-video relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#D4FF00]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
+                <div className="absolute inset-0 theme-accent-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
                 <img 
                   src={turmericImage} 
                   alt="Turmeric" 
@@ -235,8 +235,8 @@ export default function HomePage() {
                 />
               </div>
               <div className="p-6 relative z-20">
-                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4 group-hover:bg-[#D4FF00] group-hover:text-[#091612] transition-colors">Spices</span>
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-[#D4FF00] transition-colors">Whole spice excellence</h3>
+                <span className="inline-block px-3 py-1 theme-secondary rounded-full text-xs tracking-wider uppercase mb-4 group-hover:theme-button transition-colors">Spices</span>
+                <h3 className="text-lg font-semibold mb-2 group-hover:theme-accent transition-colors">Whole spice excellence</h3>
                 <p className={`text-sm ${theme.textMuted}`}>Pure, expertly processed spices for export.</p>
               </div>
             </Link>
@@ -247,7 +247,7 @@ export default function HomePage() {
               className={`rounded-2xl overflow-hidden ${theme.bg} border ${theme.border} group cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-300 ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} block`}
             >
               <div className="aspect-video relative overflow-hidden">
-                <div className="absolute inset-0 bg-[#D4FF00]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
+                <div className="absolute inset-0 theme-accent-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 mix-blend-overlay"></div>
                 <img 
                   src={moringaImage} 
                   alt="Moringa Powder" 
@@ -255,29 +255,29 @@ export default function HomePage() {
                 />
               </div>
               <div className="p-6 relative z-20">
-                <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4 group-hover:bg-[#D4FF00] group-hover:text-[#091612] transition-colors">Herbs</span>
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-[#D4FF00] transition-colors">Clean herbal powders</h3>
+                <span className="inline-block px-3 py-1 theme-secondary rounded-full text-xs tracking-wider uppercase mb-4 group-hover:theme-button transition-colors">Herbs</span>
+                <h3 className="text-lg font-semibold mb-2 group-hover:theme-accent transition-colors">Clean herbal powders</h3>
                 <p className={`text-sm ${theme.textMuted}`}>Pure herbal ingredients for export.</p>
               </div>
             </Link>
 
             {/* Feature Text Blocks */}
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[400ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[400ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">Flexible export options</h3>
               <p className={`text-sm ${theme.textMuted}`}>Custom shipping and incoterms for every order.</p>
             </div>
             
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[500ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[500ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">End-to-end logistics</h3>
               <p className={`text-sm ${theme.textMuted}`}>Efficient handling from origin to port.</p>
             </div>
 
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[600ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[600ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">Global compliance</h3>
               <p className={`text-sm ${theme.textMuted}`}>Certified processes for international standards.</p>
             </div>
 
-            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} hover:border-[#D4FF00]/30 cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[700ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
+            <div className={`rounded-2xl p-6 ${theme.bg} border ${theme.border} theme-hover-border cursor-pointer ${theme.surfaceHover} transition-all duration-700 delay-[700ms] ${featuresVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} flex flex-col justify-center`}>
               <h3 className="text-lg font-semibold mb-2">Scalable supply chain</h3>
               <p className={`text-sm ${theme.textMuted}`}>Consistent volume for large-scale buyers.</p>
             </div>

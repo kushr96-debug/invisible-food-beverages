@@ -3,15 +3,15 @@ import { notFound } from 'next/navigation';
 import { catalogData, findProduct, getCategoryProducts, makeSlug } from '@/lib/products';
 
 const theme = {
-  bg: 'bg-[#091612]',
-  surface: 'bg-[#132620]',
-  border: 'border-white/10',
-  textMain: 'text-white',
-  textMuted: 'text-gray-400',
-  accentText: 'text-[#D4FF00]',
-  btnBg: 'bg-[#D4FF00]',
-  btnBgHover: 'hover:bg-[#bce000]',
-  btnText: 'text-[#091612]',
+  bg: 'theme-page',
+  surface: 'theme-surface',
+  border: 'theme-border',
+  textMain: 'theme-text',
+  textMuted: 'theme-muted',
+  accentText: 'theme-accent',
+  btnBg: 'theme-button',
+  btnBgHover: '',
+  btnText: '',
 };
 
 export function generateStaticParams() {
@@ -41,11 +41,11 @@ export default async function ProductDetailPage({
 
   return (
     <div className={`min-h-screen ${theme.bg} ${theme.textMain} font-sans`}>
-      <section className="mx-auto max-w-7xl border-b border-white/5 px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+      <section className="mx-auto max-w-7xl border-b theme-border px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="mb-10 flex flex-wrap items-center gap-3 text-sm">
-          <Link href="/products" className={`${theme.textMuted} hover:text-white transition`}>Products</Link>
+          <Link href="/products" className={`${theme.textMuted} hover:theme-text transition`}>Products</Link>
           <span className={theme.textMuted}>/</span>
-          <Link href={`/products/${product.category.id}`} className={`${theme.textMuted} hover:text-white transition`}>{product.category.name}</Link>
+          <Link href={`/products/${product.category.id}`} className={`${theme.textMuted} hover:theme-text transition`}>{product.category.name}</Link>
           <span className={theme.textMuted}>/</span>
           <span className={theme.accentText}>{product.name}</span>
         </div>
@@ -59,17 +59,17 @@ export default async function ProductDetailPage({
               <span className={`text-sm font-semibold uppercase tracking-wider ${theme.textMuted}`}>Export Ready</span>
             </div>
             <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">{product.name}</h1>
-            <p className="mb-4 text-xl font-medium text-gray-200 sm:text-2xl">{product.tagline}</p>
+            <p className="mb-4 text-xl font-medium theme-text sm:text-2xl">{product.tagline}</p>
             <p className={`text-lg leading-relaxed ${theme.textMuted} mb-10 max-w-xl`}>{product.description}</p>
             <div className="flex flex-wrap gap-4">
               <a href="#quote-form" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 rounded-xl font-bold transition shadow-lg`}>Request Quote</a>
-              <Link href="/products" className={`px-8 py-4 rounded-xl font-bold border ${theme.border} hover:bg-white/5 transition`}>Back to Catalog</Link>
+              <Link href="/products" className={`px-8 py-4 rounded-xl font-bold border ${theme.border} theme-surface-hover transition`}>Back to Catalog</Link>
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
   {/* Image Container */}
-  <div className="col-span-1 sm:col-span-2 aspect-[16/9] rounded-2xl overflow-hidden relative border border-white/10">
+  <div className="col-span-1 sm:col-span-2 aspect-[16/9] rounded-2xl overflow-hidden relative border theme-border">
     <img src={product.image} alt={product.name} className="object-cover w-full h-full" />
   </div>
   
@@ -111,7 +111,7 @@ export default async function ProductDetailPage({
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {product.highlights.map((highlight) => (
-              <div key={highlight} className={`p-6 rounded-2xl bg-[#091612] border ${theme.border}`}>
+              <div key={highlight} className={`p-6 rounded-2xl theme-page border ${theme.border}`}>
                 <p className="font-semibold">{highlight}</p>
               </div>
             ))}
@@ -127,7 +127,7 @@ export default async function ProductDetailPage({
         <div className="space-y-4">
           {faqs.map((faq) => (
             <details key={faq.q} className={`border ${theme.border} rounded-xl overflow-hidden ${theme.surface} group`}>
-              <summary className="px-6 py-5 cursor-pointer font-semibold text-lg hover:bg-white/5 transition">{faq.q}</summary>
+              <summary className="px-6 py-5 cursor-pointer font-semibold text-lg theme-surface-hover transition">{faq.q}</summary>
               <p className={`px-6 pb-6 ${theme.textMuted}`}>{faq.a}</p>
             </details>
           ))}

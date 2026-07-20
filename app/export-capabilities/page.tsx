@@ -8,15 +8,15 @@ export const metadata: Metadata = {
 
 // Centralized theme variables
 const theme = {
-  bg: "bg-[#091612]",
-  surface: "bg-[#132620]",
-  border: "border-white/10",
-  textMain: "text-white",
-  textMuted: "text-gray-400",
-  accentText: "text-[#D4FF00]",
-  btnBg: "bg-[#D4FF00]",
-  btnBgHover: "hover:bg-[#bce000]",
-  btnText: "text-[#091612]",
+  bg: "theme-page",
+  surface: "theme-surface",
+  border: "theme-border",
+  textMain: "theme-text",
+  textMuted: "theme-muted",
+  accentText: "theme-accent",
+  btnBg: "theme-button",
+  btnBgHover: "",
+  btnText: "",
 };
 
 const capabilities = [
@@ -53,7 +53,7 @@ export default function ExportCapabilitiesPage() {
       </section>
 
       {/* ADDITIONAL INFO SECTIONS */}
-      <section id="incoterms" className="border-y border-white/5 py-16 sm:py-20 lg:py-24">
+      <section id="incoterms" className="border-y theme-border py-16 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8 items-center">
           <div>
             <p className={`text-sm font-bold uppercase tracking-widest ${theme.accentText} mb-4`}>
@@ -68,7 +68,7 @@ export default function ExportCapabilitiesPage() {
       </section>
 
       <section id="certifications" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className={`mx-auto max-w-4xl rounded-3xl border border-[#D4FF00]/20 bg-[#D4FF00]/5 p-6 text-center sm:p-10 lg:p-12`}>
+        <div className={`mx-auto max-w-4xl rounded-3xl border theme-active-border theme-accent-soft-bg p-6 text-center sm:p-10 lg:p-12`}>
           <h2 className="text-4xl font-bold mb-6">Compliance-minded exports</h2>
           <p className={`text-lg leading-relaxed sm:text-xl ${theme.textMuted}`}>
             We coordinate quality documentation and certification requirements early in the quotation process so buyers can evaluate product fit before shipment planning.
