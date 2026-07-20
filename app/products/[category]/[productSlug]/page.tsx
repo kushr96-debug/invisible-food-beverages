@@ -68,27 +68,37 @@ export default async function ProductDetailPage({
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="col-span-2 aspect-[16/9] rounded-2xl overflow-hidden relative border border-white/10">
-              <img src={product.image} alt={product.name} className="object-cover w-full h-full" />
-            </div>
-            <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
-              <h2 className="text-xl font-bold mb-4">Key details</h2>
-              <dl className="space-y-3">
-                {product.specs.map((spec) => (
-                  <div key={spec.label} className="flex justify-between gap-4 border-b border-white/10 pb-3">
-                    <dt className={theme.textMuted}>{spec.label}</dt>
-                    <dd className="font-semibold text-right">{spec.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-            <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
-              <h2 className="text-xl font-bold mb-4">Applications</h2>
-              <ul className="space-y-3">
-                {product.applications.map((item) => <li key={item} className={`${theme.textMuted}`}>• {item}</li>)}
-              </ul>
-            </div>
+  {/* Image Container */}
+  <div className="col-span-1 sm:col-span-2 aspect-[16/9] rounded-2xl overflow-hidden relative border border-white/10">
+    <img src={product.image} alt={product.name} className="object-cover w-full h-full" />
+  </div>
+  
+  {/* Cards Container - Added col-span-1 sm:col-span-2 to stretch full width */}
+  <div className="col-span-1 sm:col-span-2 space-y-6">
+    
+    {/* Key details card */}
+    <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
+      <h2 className="text-xl font-bold mb-4">Key details</h2>
+      <dl className="space-y-3">
+        {product.specs.map((spec) => (
+          <div key={spec.label} className={`flex justify-between gap-4 border-b border-border/20 pb-3 last:border-b-0`}>
+            <dt className={theme.textMuted}>{spec.label}</dt>
+            <dd className="font-semibold text-right">{spec.value}</dd>
           </div>
+        ))}
+      </dl>
+    </div>
+
+    {/* Applications card */}
+    <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
+      <h2 className="text-xl font-bold mb-4">Applications</h2>
+      <ul className={`space-y-3 list-disc list-inside px-1 ${theme.textMuted}`}>
+        {product.applications.map((item) => <li key={item}>{item}</li>)}
+      </ul>
+    </div>
+    
+  </div>
+</div>
         </div>
       </section>
 
