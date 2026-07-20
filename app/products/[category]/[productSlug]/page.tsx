@@ -41,7 +41,7 @@ export default async function ProductDetailPage({
 
   return (
     <div className={`min-h-screen ${theme.bg} ${theme.textMain} font-sans`}>
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-white/5">
+      <section className="mx-auto max-w-7xl border-b border-white/5 px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="mb-10 flex flex-wrap items-center gap-3 text-sm">
           <Link href="/products" className={`${theme.textMuted} hover:text-white transition`}>Products</Link>
           <span className={theme.textMuted}>/</span>
@@ -50,7 +50,7 @@ export default async function ProductDetailPage({
           <span className={theme.accentText}>{product.name}</span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <span className={`${theme.btnBg} ${theme.btnText} text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full`}>
@@ -58,8 +58,8 @@ export default async function ProductDetailPage({
               </span>
               <span className={`text-sm font-semibold uppercase tracking-wider ${theme.textMuted}`}>Export Ready</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">{product.name}</h1>
-            <p className="text-2xl text-gray-200 font-medium mb-4">{product.tagline}</p>
+            <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">{product.name}</h1>
+            <p className="mb-4 text-xl font-medium text-gray-200 sm:text-2xl">{product.tagline}</p>
             <p className={`text-lg leading-relaxed ${theme.textMuted} mb-10 max-w-xl`}>{product.description}</p>
             <div className="flex flex-wrap gap-4">
               <a href="#quote-form" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} px-8 py-4 rounded-xl font-bold transition shadow-lg`}>Request Quote</a>
@@ -67,32 +67,42 @@ export default async function ProductDetailPage({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2 aspect-[16/9] rounded-2xl overflow-hidden relative border border-white/10">
-              <img src={product.image} alt={product.name} className="object-cover w-full h-full" />
-            </div>
-            <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
-              <h2 className="text-xl font-bold mb-4">Key details</h2>
-              <dl className="space-y-3">
-                {product.specs.map((spec) => (
-                  <div key={spec.label} className="flex justify-between gap-4 border-b border-white/10 pb-3">
-                    <dt className={theme.textMuted}>{spec.label}</dt>
-                    <dd className="font-semibold text-right">{spec.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-            <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
-              <h2 className="text-xl font-bold mb-4">Applications</h2>
-              <ul className="space-y-3">
-                {product.applications.map((item) => <li key={item} className={`${theme.textMuted}`}>• {item}</li>)}
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+  {/* Image Container */}
+  <div className="col-span-1 sm:col-span-2 aspect-[16/9] rounded-2xl overflow-hidden relative border border-white/10">
+    <img src={product.image} alt={product.name} className="object-cover w-full h-full" />
+  </div>
+  
+  {/* Cards Container - Added col-span-1 sm:col-span-2 to stretch full width */}
+  <div className="col-span-1 sm:col-span-2 space-y-6">
+    
+    {/* Key details card */}
+    <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
+      <h2 className="text-xl font-bold mb-4">Key details</h2>
+      <dl className="space-y-3">
+        {product.specs.map((spec) => (
+          <div key={spec.label} className={`flex justify-between gap-4 border-b border-border/20 pb-3 last:border-b-0`}>
+            <dt className={theme.textMuted}>{spec.label}</dt>
+            <dd className="font-semibold text-right">{spec.value}</dd>
           </div>
+        ))}
+      </dl>
+    </div>
+
+    {/* Applications card */}
+    <div className={`${theme.surface} rounded-2xl p-6 border ${theme.border}`}>
+      <h2 className="text-xl font-bold mb-4">Applications</h2>
+      <ul className={`space-y-3 list-disc list-inside px-1 ${theme.textMuted}`}>
+        {product.applications.map((item) => <li key={item}>{item}</li>)}
+      </ul>
+    </div>
+    
+  </div>
+</div>
         </div>
       </section>
 
-      <section className={`py-20 ${theme.surface} border-b ${theme.border}`}>
+      <section className={`py-16 sm:py-20 ${theme.surface} border-b ${theme.border}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center max-w-3xl mx-auto">
             <span className={`${theme.accentText} text-xs font-bold tracking-widest uppercase mb-4 block`}>Product Assurance</span>
@@ -109,7 +119,7 @@ export default async function ProductDetailPage({
         </div>
       </section>
 
-      <section className="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="text-center mb-12">
           <span className={`uppercase tracking-wider text-sm font-bold ${theme.accentText} block mb-2`}>FAQ</span>
           <h2 className="text-3xl md:text-4xl font-bold">Export answers, simplified</h2>
@@ -124,9 +134,9 @@ export default async function ProductDetailPage({
         </div>
       </section>
 
-      <section id="quote-form" className={`py-24 ${theme.surface} border-t ${theme.border}`}>
+      <section id="quote-form" className={`py-16 sm:py-20 lg:py-24 ${theme.surface} border-t ${theme.border}`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-4">Ask about {product.name}</h2>
+          <h2 className="mb-4 text-3xl font-bold sm:text-4xl">Ask about {product.name}</h2>
           <p className={`text-lg ${theme.textMuted} mb-8`}>Share destination, quantity, packaging preference, and target shipment timeline for a tailored export quote.</p>
           <Link href="/contact" className={`${theme.btnBg} ${theme.btnText} ${theme.btnBgHover} inline-flex px-8 py-4 rounded-xl font-bold transition shadow-lg`}>Contact export team</Link>
         </div>

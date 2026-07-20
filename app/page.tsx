@@ -23,16 +23,16 @@ const theme = {
 };
 
 // Custom Hook for Staggered Scroll Reveal
-function useScrollReveal() {
+function useScrollReveal(): [React.RefObject<HTMLElement | null>, boolean] {
   const [isVisible, setIsVisible] = useState(false);
-  const domRef = useRef(null);
+  const domRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(domRef.current); // Only animate once
+          if (domRef.current) observer.unobserve(domRef.current); // Only animate once
         }
       },
       { threshold: 0.15 } // Trigger when 15% of the element is visible
@@ -112,7 +112,7 @@ export default function HomePage() {
     <div className={`min-h-screen ${theme.bg} ${theme.textMain} font-sans`}>
 
       {/* HERO SECTION */}
-      <section className="relative pt-40 pb-32 lg:pt-56 lg:pb-40 overflow-hidden flex items-center min-h-[90vh]">
+      <section className="relative flex min-h-[82vh] items-center overflow-hidden px-0 py-20 sm:py-28 lg:min-h-[90vh] lg:py-40">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://cdn.prod.website-files.com/6a5a98987cd29167503c9713/6a5a99bba9b7db7c12c86078_acb18f3e-4819-4adb-a59a-7ebeac465cce.avif" 
@@ -124,19 +124,19 @@ export default function HomePage() {
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-12">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+          <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end lg:gap-12">
             
             {/* Left side: Heading with Typing Effect */}
             <div className="max-w-3xl animate-fade-in-up">
-              <h1 className="text-5xl md:text-[5.5rem] font-medium tracking-tight leading-[1.05]">
-                Exporting <span className={`${theme.accentText} inline-block min-w-[400px]`}>{typewriterText}<span className="animate-blink">|</span></span><br />
+              <h1 className="text-4xl font-medium leading-[1.06] tracking-tight sm:text-5xl md:text-7xl lg:text-[5.5rem]">
+                Exporting <span className={`${theme.accentText} inline sm:inline-block sm:min-w-[360px] lg:min-w-[400px]`}>{typewriterText}<span className="animate-blink">|</span></span><br />
                 Supplying the world.
               </h1>
             </div>
 
             {/* Right side: Subtext and Buttons */}
             <div className="max-w-md lg:mb-2 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-              <p className={`text-lg md:text-xl ${theme.textMuted} mb-8 leading-relaxed`}>
+              <p className={`mb-8 text-base leading-relaxed sm:text-lg md:text-xl ${theme.textMuted}`}>
                 Premium grains, spices, coffee, and lentils.<br />Certified quality. Trusted global partner.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -159,25 +159,25 @@ export default function HomePage() {
       </section>
 
       {/* PERFORMANCE STATS SECTION (Staggered Scroll) */}
-      <section className={`py-24 ${theme.surface}`} ref={statsRef}>
+      <section className={`py-16 sm:py-20 lg:py-24 ${theme.surface}`} ref={statsRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-1000 ${statsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-4xl font-semibold mb-4">Export performance at a glance</h2>
+            <h2 className="mb-4 text-3xl font-semibold sm:text-4xl">Export performance at a glance</h2>
             <p className={`text-lg ${theme.textMuted}`}>Industry-leading reliability and scale</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className={`p-8 rounded-2xl ${theme.bg} border ${theme.border} text-center transition-all duration-700 delay-100 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className={`${theme.textMuted} font-medium tracking-wide uppercase text-sm mb-2`}>On-time shipments</div>
-              <div className={`text-6xl font-bold ${theme.accentText}`}>95%</div>
+              <div className={`text-4xl font-bold sm:text-5xl lg:text-6xl ${theme.accentText}`}>95%</div>
             </div>
             <div className={`p-8 rounded-2xl ${theme.bg} border ${theme.border} text-center transition-all duration-700 delay-200 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className={`${theme.textMuted} font-medium tracking-wide uppercase text-sm mb-2`}>Exports annually</div>
-              <div className={`text-6xl font-bold ${theme.accentText}`}>2,400</div>
+              <div className={`text-4xl font-bold sm:text-5xl lg:text-6xl ${theme.accentText}`}>2,400</div>
             </div>
             <div className={`p-8 rounded-2xl ${theme.bg} border ${theme.border} text-center transition-all duration-700 delay-300 ${statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className={`${theme.textMuted} font-medium tracking-wide uppercase text-sm mb-2`}>Tons shipped monthly</div>
-              <div className={`text-6xl font-bold ${theme.accentText}`}>1.2M</div>
+              <div className={`text-4xl font-bold sm:text-5xl lg:text-6xl ${theme.accentText}`}>1.2M</div>
             </div>
           </div>
         </div>
@@ -189,12 +189,12 @@ export default function HomePage() {
       </section>
 
       {/* FEATURE GRID SECTION (Staggered Scroll + Enhanced Image Hover) */}
-      <section className={`py-24 ${theme.surface} border-t ${theme.border}`} ref={featuresRef}>
+      <section className={`py-16 sm:py-20 lg:py-24 ${theme.surface} border-t ${theme.border}`} ref={featuresRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`mb-16 transition-all duration-1000 ${featuresVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <span className={`${theme.accentText} text-xs font-bold tracking-widest uppercase mb-4 block`}>Your trusted export source</span>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-6">Premium crops. Delivered worldwide.</h2>
-            <p className={`text-xl ${theme.textMuted} max-w-2xl`}>
+            <h2 className="mb-6 text-3xl font-semibold sm:text-4xl md:text-5xl">Premium crops. Delivered worldwide.</h2>
+            <p className={`max-w-2xl text-base leading-7 sm:text-xl ${theme.textMuted}`}>
               Supplying certified grains, spices, coffee, tea, and lentils to global importers. Explore our catalog and export services.
             </p>
           </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
                   className="w-full h-full object-cover transform group-hover:scale-110 group-hover:rotate-1 group-hover:brightness-110 transition-all duration-700 ease-out" 
                 />
               </div>
-              <div className="p-8 relative z-20">
+              <div className="relative z-20 p-6 sm:p-8">
                 <span className="inline-block px-3 py-1 bg-white/5 rounded-full text-xs tracking-wider uppercase mb-4 group-hover:bg-[#D4FF00] group-hover:text-[#091612] transition-colors">Grains</span>
                 <h3 className="text-2xl font-semibold mb-2 group-hover:text-[#D4FF00] transition-colors">Certified grains, global supply</h3>
                 <p className={theme.textMuted}>Rice, wheat, and specialty grains for international buyers.</p>

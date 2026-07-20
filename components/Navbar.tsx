@@ -1,9 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { catalogData, getProductImage, makeSlug } from "@/lib/products";
 import { Logo } from "./Logo";
 
 const featuredCategoryIds = ["premium-rice", "grains-pulses", "whole-spices"];
+const navLinks = [
+  { label: "About", href: "/about" },
+  { label: "Export", href: "/export-capabilities" },
+  { label: "Contact Us", href: "/contact" },
+  { label: "Blog", href: "/blog" },
+];
 
 const menuColumns = featuredCategoryIds.map((categoryId) => {
   const category = catalogData.find((item) => item.id === categoryId) ?? catalogData[0];
@@ -17,12 +26,10 @@ const menuColumns = featuredCategoryIds.map((categoryId) => {
       name,
       href: `/products/${category.id}/${makeSlug(name)}`,
       desc: category.summary,
-      image: getProductImage(name, category)
+      image: getProductImage(name, category),
     })),
   };
 });
-
-
 
 function DownArrow() {
   return (
@@ -33,9 +40,12 @@ function DownArrow() {
 }
 
 export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <header className="sticky top-0 z-50 border-b border-emerald-400/10 bg-[#062720]/95 text-white shadow-2xl shadow-emerald-950/25 backdrop-blur">
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <nav className="mx-auto flex min-h-16 max-w-7xl items-center justify-between px-4 py-3 sm:min-h-20 sm:px-6 lg:px-8" aria-label="Main navigation">
         <Logo />
         <div className="hidden items-center gap-8 md:flex">
           <div className="group">
@@ -55,15 +65,15 @@ export function Navbar() {
                       </Link>
                       <div className="mt-7 space-y-5">
                         {column.products.map((product) => (
-                          <Link key={product.name} href={product.href} className="group/item flex gap-4 rounded-2xl p-2 -m-2 transition hover:bg-white/5 focus:bg-white/5 focus:outline-none">
+                          <Link key={product.name} href={product.href} className="group/item -m-2 flex gap-4 rounded-2xl p-2 transition hover:bg-white/5 focus:bg-white/5 focus:outline-none">
                             <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-emerald-200/20 bg-white/10">
-                          <Image src={product.image} alt={product.name} fill sizes="56px" className="object-cover transition-transform duration-500 group-hover/item:scale-125" />
-                        </span>
-                        <span>
-                          <span className="block text-lg font-extrabold leading-tight text-white transition group-hover/item:text-emerald-300">{product.name}</span>
-                          <span className="mt-1 block text-sm leading-6 text-emerald-50/70">{product.desc}</span>
-                        </span>
-                      </Link>
+                              <Image src={product.image} alt={product.name} fill sizes="56px" className="object-cover transition-transform duration-500 group-hover/item:scale-125" />
+                            </span>
+                            <span>
+                              <span className="block text-lg font-extrabold leading-tight text-white transition group-hover/item:text-emerald-300">{product.name}</span>
+                              <span className="mt-1 block text-sm leading-6 text-emerald-50/70">{product.desc}</span>
+                            </span>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -72,12 +82,35 @@ export function Navbar() {
               </div>
             </div>
           </div>
-          <Link href="/about" className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">About</Link>
-          <Link href="/contact" className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">Contact Us</Link>
-          <Link href="/blog" className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">Blog</Link>
+          {navLinks.map((link) => <Link key={link.href} href={link.href} className="text-sm font-semibold text-emerald-50/75 transition hover:text-emerald-300">{link.label}</Link>)}
         </div>
-        <Link href="/products" className="rounded-md border border-emerald-100/20 px-3 py-2 text-sm font-semibold text-emerald-50 md:hidden">Catalog</Link>
+        <button
+          type="button"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-100/20 text-emerald-50 transition hover:bg-white/10 md:hidden"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen((current) => !current)}
+        >
+          <span className="relative h-5 w-6">
+            <span className={`absolute left-0 top-0 h-0.5 w-6 rounded-full bg-current transition ${isOpen ? "translate-y-2 rotate-45" : ""}`} />
+            <span className={`absolute left-0 top-2 h-0.5 w-6 rounded-full bg-current transition ${isOpen ? "opacity-0" : ""}`} />
+            <span className={`absolute left-0 top-4 h-0.5 w-6 rounded-full bg-current transition ${isOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+          </span>
+        </button>
       </nav>
+      <div className={`${isOpen ? "grid" : "hidden"} border-t border-white/10 bg-[#062720] px-4 pb-5 md:hidden`}>
+        <Link onClick={closeMenu} href="/products" className="rounded-2xl bg-[#D4FF00] px-5 py-3 text-center font-bold text-[#091612]">Browse products</Link>
+        <div className="mt-4 grid gap-2">
+          {catalogData.map((category) => (
+            <Link onClick={closeMenu} key={category.id} href={`/products/${category.id}`} className="rounded-xl border border-white/10 px-4 py-3 text-sm font-semibold text-emerald-50/80 transition hover:border-[#D4FF00]/40 hover:text-[#D4FF00]">
+              {category.name}
+            </Link>
+          ))}
+        </div>
+        <div className="mt-4 grid gap-2 border-t border-white/10 pt-4">
+          {navLinks.map((link) => <Link onClick={closeMenu} key={link.href} href={link.href} className="rounded-xl px-4 py-3 font-semibold text-emerald-50/80 transition hover:bg-white/5 hover:text-[#D4FF00]">{link.label}</Link>)}
+        </div>
+      </div>
     </header>
   );
 }
